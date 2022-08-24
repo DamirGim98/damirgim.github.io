@@ -5,7 +5,7 @@
     object-fit: cover;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 1s ease-in;
+    transition: opacity 2s ease-in;
 
     &_loaded {
       visibility: visible;

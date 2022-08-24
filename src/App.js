@@ -8,13 +8,18 @@ import MyInput from "./components/UI/input/MyInput";
 import MyPaintings from "./components/paintings/MyPaintings";
 const cx = cn.bind(styles);
 
+const BASE_URL = 'https://test-front.framework.team/paintings?'
+
 function App() {
     const [theme, setTheme] = useState("light")
 
     const [paintings, setPaintings] = useState([])
 
+    const [pageQty, setPageQty] = useState(0)
+
+    const [page, setPage] = useState(3)
+
     const [filter, setFilter] = useState({
-        page: 1,
         limit: 12,
         query: "",
         dateStart: null,
@@ -28,26 +33,27 @@ function App() {
     }
 
     useEffect(() => {
-        async function fetchPaintings() {
-            try {
-                const response = await axios.get('https://test-front.framework.team/paintings', {
-                    params: {
-                        q: filter.query,
-                        _page: filter.page,
-                        _limit: filter.limit,
-                        authorId: filter.authorId === "" ? null : filter.authorId,
-                        created_gte: filter.dateStart === "" ? null : filter.dateStart,
-                        created_lte: filter.dateEnd === "" ? null : filter.dateEnd,
-                        locationId: filter.locationId === "" ? null : filter.locationId,
-                    }
-                })
-                setPaintings(response.data)
-            } catch (e) {
-                alert('Что-то пошло не так...')
+        axios.get(BASE_URL, {
+            params: {
+                q: filter.query,
+                _page: page,
+                _limit: filter.limit,
+                authorId: filter.authorId === "" ? null : filter.authorId,
+                created_gte: filter.dateStart === "" ? null : filter.dateStart,
+                created_lte: filter.dateEnd === "" ? null : filter.dateEnd,
+                locationId: filter.locationId === "" ? null : filter.locationId,
             }
-        }
-        fetchPaintings()
-    }, [filter])
+        }).then(
+            ({data, headers}) => {
+                setPaintings(data)
+                setPageQty(Math.ceil(headers['x-total-count']/filter.limit))
+                if (pageQty < page) {
+                    setPage(1)
+                }
+
+            }
+        )
+    }, [filter, page, pageQty])
 
     return (<div className="App" id={theme}>
         <div className={cx("wrapper", {"wrapper__dark": theme === "dark"})}>
