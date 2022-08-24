@@ -6,17 +6,18 @@ import styles from './style/App.module.scss'
 import MyHeader from "./components/header/MyHeader";
 import MyInput from "./components/UI/input/MyInput";
 import MyPaintings from "./components/paintings/MyPaintings";
-
 const cx = cn.bind(styles);
 
 function App() {
     const [theme, setTheme] = useState("light")
+
     const [paintings, setPaintings] = useState([])
 
     const [filter, setFilter] = useState({
         page: 1,
+        limit: 12,
         query: "",
-        dateStart: "",
+        dateStart: null,
         dateEnd: "",
         authorId: "",
         locationId: ""
@@ -27,27 +28,26 @@ function App() {
     }
 
     useEffect(() => {
-        fetchPaintings()
-    })
-
-    async function fetchPaintings() {
-        try {
-            const response = await axios.get('https://test-front.framework.team/paintings', {
-                params: {
-                    _page: 1,
-                    _limit: 12,
-                    q: filter.query,
-                    authorId: null,
-                    created_gte: null,
-                    created_lte: null,
-                    locationId: null,
-                }
-            })
-            setPaintings(response.data)
-        } catch (e) {
-            alert('Что-то пошло не так...')
+        async function fetchPaintings() {
+            try {
+                const response = await axios.get('https://test-front.framework.team/paintings', {
+                    params: {
+                        q: filter.query,
+                        _page: filter.page,
+                        _limit: filter.limit,
+                        authorId: filter.authorId === "" ? null : filter.authorId,
+                        created_gte: filter.dateStart === "" ? null : filter.dateStart,
+                        created_lte: filter.dateEnd === "" ? null : filter.dateEnd,
+                        locationId: filter.locationId === "" ? null : filter.locationId,
+                    }
+                })
+                setPaintings(response.data)
+            } catch (e) {
+                alert('Что-то пошло не так...')
+            }
         }
-    }
+        fetchPaintings()
+    }, [filter])
 
     return (<div className="App" id={theme}>
         <div className={cx("wrapper", {"wrapper__dark": theme === "dark"})}>
@@ -66,5 +66,4 @@ function App() {
         </div>
     </div>);
 }
-
 export default App;
