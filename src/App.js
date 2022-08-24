@@ -6,38 +6,44 @@ import styles from './style/App.module.scss'
 import MyHeader from "./components/header/MyHeader";
 import MyInput from "./components/UI/input/MyInput";
 import MyPaintings from "./components/paintings/MyPaintings";
+
 const cx = cn.bind(styles);
 
 function App() {
     const [theme, setTheme] = useState("light")
     const [paintings, setPaintings] = useState([])
-    const [page] = useState(1)
-    const [searchQuery, setSearchQuery] = useState("")
-    const [dateStart, setDateStart] = useState("")
-    const [dateEnd, setDateEnd] = useState("")
+
+    const [filter, setFilter] = useState({
+        page: 1,
+        query: "",
+        dateStart: "",
+        dateEnd: "",
+        authorId: "",
+        locationId: ""
+    })
+
     const toggleTheme = () => {
         setTheme((curr) => curr === "light" ? "dark" : "light")
     }
+
     useEffect(() => {
         fetchPaintings()
     })
-    const  fetchPaintings= () =>  {
-        try {
-            setTimeout( async () => {
-                const response = await axios.get('https://test-front.framework.team/paintings', {
-                    params: {
-                        _page: page,
-                        _limit: 12,
-                        q:  searchQuery,
-                        authorId: null,
-                        created_gte: dateStart,
-                        created_lte: dateEnd,
-                        locationId: null,
 
-                    }
-                })
-                setPaintings(response.data)
-            }, 1000)
+    async function fetchPaintings() {
+        try {
+            const response = await axios.get('https://test-front.framework.team/paintings', {
+                params: {
+                    _page: 1,
+                    _limit: 12,
+                    q: filter.query,
+                    authorId: null,
+                    created_gte: null,
+                    created_lte: null,
+                    locationId: null,
+                }
+            })
+            setPaintings(response.data)
         } catch (e) {
             alert('Что-то пошло не так...')
         }
@@ -49,8 +55,8 @@ function App() {
                 <MyHeader theme={theme} toggleTheme={toggleTheme}/>
                 <MyInput
                     theme={theme}
-                    value={searchQuery}
-                    onChange={e => setSearchQuery(e.target.value)}
+                    value={filter.query}
+                    onChange={e => setFilter({...filter, query: e.target.value})}
                     placeholder="Name"
                 />
                 <MyPaintings
