@@ -6,9 +6,9 @@
   flex-direction: column;
   min-height: 100vh;
   overflow: hidden;
-  transition: background 0.5s ease;
+  transition: background 1.0s ease;
 
-  &--dark {
+  &__dark {
     background-color: #000000;
   }
 
