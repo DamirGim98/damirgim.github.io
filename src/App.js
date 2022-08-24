@@ -17,7 +17,7 @@ function App() {
 
     const [pageQty, setPageQty] = useState(0)
 
-    const [page, setPage] = useState(3)
+    const [page, setPage] = useState(1)
 
     const [filter, setFilter] = useState({
         limit: 12,
@@ -47,13 +47,13 @@ function App() {
             ({data, headers}) => {
                 setPaintings(data)
                 setPageQty(Math.ceil(headers['x-total-count']/filter.limit))
-                if (pageQty < page) {
+                console.log(pageQty)
+                if (Math.ceil(headers['x-total-count']/filter.limit) < page) {
                     setPage(1)
                 }
-
             }
         )
-    }, [filter, page, pageQty])
+    }, [filter, page])
 
     return (<div className="App" id={theme}>
         <div className={cx("wrapper", {"wrapper__dark": theme === "dark"})}>
