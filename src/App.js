@@ -8,6 +8,7 @@ import MyPaintings from "./components/paintings/MyPaintings";
 import useDebounce from "./hooks/use-debounce";
 import MyWrapper from "./components/wrapper/MyWrapper";
 import MyPagination from "./components/pagination/MyPagination";
+import MyDropDown from "./components/dropdown/MyDropDown";
 
 
 const BASE_URL = 'https://test-front.framework.team/paintings?'
@@ -64,12 +65,15 @@ function App() {
             theme={theme}
         >
             <MyHeader theme={theme} toggleTheme={toggleTheme}/>
-            <MyInput
-                theme={theme}
-                value={query}
-                onChange={e => setQuery(e.target.value)}
-                placeholder="Name"
-            />
+            <div style={{display: "flex"}}>
+                <MyInput
+                    theme={theme}
+                    value={query}
+                    onChange={e => setQuery(e.target.value)}
+                    placeholder="Name"
+                />
+                <MyDropDown theme={theme}/>
+            </div>
             <MyPaintings
                 paintings={paintings}
             />
