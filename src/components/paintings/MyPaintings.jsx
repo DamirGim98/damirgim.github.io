@@ -8,20 +8,7 @@ import LocationService from "../../API/LocationService";
 const cx = cn.bind(styles);
 
 
-const MyPaintings = ({paintings}) => {
-    const [authors, setAuthors] = useState([])
-    const [locations, setLocations] = useState([])
-
-    useEffect(() => {
-        async function fetchData() {
-            const authors_data = await AuthorService.getAll()
-            const locations_data = await LocationService.getAll()
-            setAuthors(authors_data)
-            setLocations(locations_data)
-        }
-
-        fetchData().then(e => console.log("fetching once"))
-    }, [])
+const MyPaintings = ({paintings, authors, locations}) => {
     return (
         <div className={cx("paintings")}>
             {paintings.map(item => (
