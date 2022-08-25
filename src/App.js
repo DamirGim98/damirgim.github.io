@@ -7,9 +7,7 @@ import MyInput from "./components/UI/input/MyInput";
 import MyPaintings from "./components/paintings/MyPaintings";
 import useDebounce from "./hooks/use-debounce";
 import MyWrapper from "./components/wrapper/MyWrapper";
-import {Pagination} from "@mui/material";
-
-
+import MyPagination from "./components/pagination/MyPagination";
 
 
 const BASE_URL = 'https://test-front.framework.team/paintings?'
@@ -53,8 +51,8 @@ function App() {
         }).then(
             ({data, headers}) => {
                 setPaintings(data)
-                setPageQty(Math.ceil(headers['x-total-count']/filter.limit))
-                if (Math.ceil(headers['x-total-count']/filter.limit) < page) {
+                setPageQty(Math.ceil(headers['x-total-count'] / filter.limit))
+                if (Math.ceil(headers['x-total-count'] / filter.limit) < page) {
                     setPage(1)
                 }
             }
@@ -75,20 +73,14 @@ function App() {
             <MyPaintings
                 paintings={paintings}
             />
-            <div className="pagination"
-                style={{marginTop: "44px", marginBottom:"93px"}}
-            >
-                {!!pageQty && (
-                    <Pagination
-                        count={pageQty}
-                        page={page}
-                        showFirstButton
-                        showLastButton
-                        onChange={(_, num) => setPage(num)}
-                    />
-                )}
-            </div>
+            <MyPagination
+                theme={theme}
+                page={page}
+                setPage={setPage}
+                pageQty={pageQty}
+            />
         </MyWrapper>
     </div>);
 }
+
 export default App;
