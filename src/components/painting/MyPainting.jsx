@@ -4,31 +4,31 @@ import styles from './MyPainting.module.scss'
 
 const cx = cn.bind(styles);
 
-const MyPainting = ({painting}) => {
+const MyPainting = ({imgUrl, name, authorName, created, location}) => {
     const [imgLoaded, setImgLoaded] = useState(false)
     return (
         <div className={cx("painting")}>
             <img
                 onLoad={() => setImgLoaded(true)}
                 className={cx('painting__image', {'painting__image_loaded': imgLoaded})}
-                src={`https://test-front.framework.team${painting.imageUrl}`}
-                alt={painting.name}
+                src={`https://test-front.framework.team${imgUrl}`}
+                alt={name}
             />
 
             <div className={cx('painting__description')}>
-                <div className={cx('painting__name')}>{painting.name}</div>
+                <div className={cx('painting__name')}>{name}</div>
                 <div className={cx('painting__info')}>
                     <div>
                         <span>Author: </span>
-                        {painting.authorId}
+                        {authorName}
                     </div>
                     <div>
                         <span>Created: </span>
-                        {painting.created}
+                        {created}
                     </div>
                     <div>
                         <span>Location: </span>
-                        {painting.locationId}
+                        {location}
                     </div>
                 </div>
             </div>
