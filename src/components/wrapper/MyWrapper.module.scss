@@ -1,0 +1,30 @@
+.wrapper {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
+  transition: background 1.0s ease;
+
+  &__dark {
+    background-color: #000000;
+  }
+
+  &__container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 123px;
+
+    @media (max-width:1365.98px) {
+      padding: 0 42px;
+    }
+
+    @media (max-width: 1023.98px) {
+      padding: 0 34px;
+    }
+
+    @media (max-width: 767.98px) {
+      padding: 0 20px;
+    }
+  }
+}

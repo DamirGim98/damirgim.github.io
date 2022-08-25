@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios'
-import cn from "classnames/bind";
 import './style/resetStyle.css'
-import styles from './style/App.module.scss'
+import './style/App.module.scss'
 import MyHeader from "./components/header/MyHeader";
 import MyInput from "./components/UI/input/MyInput";
 import MyPaintings from "./components/paintings/MyPaintings";
 import useDebounce from "./hooks/use-debounce";
-const cx = cn.bind(styles);
+import MyWrapper from "./components/wrapper/MyWrapper";
 
 const BASE_URL = 'https://test-front.framework.team/paintings?'
 
@@ -59,20 +58,20 @@ function App() {
     }, [filter, page, debouncedSearch])
 
     return (<div className="App">
-        <div className={cx("wrapper", {"wrapper__dark": theme === "dark"})}>
-            <div className={cx("wrapper__container")}>
-                <MyHeader theme={theme} toggleTheme={toggleTheme}/>
-                <MyInput
-                    theme={theme}
-                    value={query}
-                    onChange={e => setQuery(e.target.value)}
-                    placeholder="Name"
-                />
-                <MyPaintings
-                    paintings={paintings}
-                />
-            </div>
-        </div>
+        <MyWrapper
+            theme={theme}
+        >
+            <MyHeader theme={theme} toggleTheme={toggleTheme}/>
+            <MyInput
+                theme={theme}
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+                placeholder="Name"
+            />
+            <MyPaintings
+                paintings={paintings}
+            />
+        </MyWrapper>
     </div>);
 }
 export default App;
