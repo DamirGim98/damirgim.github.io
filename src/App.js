@@ -7,6 +7,10 @@ import MyInput from "./components/UI/input/MyInput";
 import MyPaintings from "./components/paintings/MyPaintings";
 import useDebounce from "./hooks/use-debounce";
 import MyWrapper from "./components/wrapper/MyWrapper";
+import {Pagination} from "@mui/material";
+
+
+
 
 const BASE_URL = 'https://test-front.framework.team/paintings?'
 
@@ -21,7 +25,7 @@ function App() {
 
     const [query, setQuery] = useState("")
 
-    const [filter, setFilter] = useState({
+    const [filter] = useState({
         limit: 12,
         dateStart: "",
         dateEnd: "",
@@ -71,6 +75,19 @@ function App() {
             <MyPaintings
                 paintings={paintings}
             />
+            <div className="pagination"
+                style={{marginTop: "44px", marginBottom:"93px"}}
+            >
+                {!!pageQty && (
+                    <Pagination
+                        count={pageQty}
+                        page={page}
+                        showFirstButton
+                        showLastButton
+                        onChange={(_, num) => setPage(num)}
+                    />
+                )}
+            </div>
         </MyWrapper>
     </div>);
 }

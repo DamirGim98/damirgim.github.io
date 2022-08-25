@@ -1,0 +1,66 @@
+.pagination {
+  .MuiPagination-root {
+    display: flex;
+    align-items: center;
+    width: 280px;
+    height: 40px;
+  }
+  .MuiPagination-ul {
+    width: 280px;
+    height: 40px;
+    button {
+      margin: 0;
+      height: 40px;
+      width: 40px;
+      border: 1px solid black;
+      border-radius: 0;
+      &:hover {
+        background-color: #EDEDED;
+      }
+      &:active {
+        background-color: black;
+      }
+    }
+    li {
+      &:nth-child(1) {
+        button {
+          border-radius: 10px 0 0 10px;
+        }
+      }
+      &:last-child {
+        button {
+          border-radius: 0 10px 10px 0;
+        }
+      }
+    }
+    .Mui-selected {
+      background-color: black;
+      color: white;
+      &:hover {
+        background: black;
+      }
+    }
+  }
+
+  &_dark {
+    .MuiPagination-ul {
+      button {
+        color: white;
+        border: 1px solid white;
+        &:hover {
+          background-color: #464646;
+        }
+        &:active {
+          background-color: white;
+        }
+      }
+      .Mui-selected {
+        background-color: white;
+        color: black;
+        &:hover {
+          background-color: white;
+        }
+      }
+    }
+  }
+}
