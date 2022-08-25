@@ -6,6 +6,7 @@ import styles from './style/App.module.scss'
 import MyHeader from "./components/header/MyHeader";
 import MyInput from "./components/UI/input/MyInput";
 import MyPaintings from "./components/paintings/MyPaintings";
+import useDebounce from "./hooks/use-debounce";
 const cx = cn.bind(styles);
 
 const BASE_URL = 'https://test-front.framework.team/paintings?'
@@ -19,14 +20,17 @@ function App() {
 
     const [page, setPage] = useState(1)
 
+    const [query, setQuery] = useState("")
+
     const [filter, setFilter] = useState({
         limit: 12,
-        query: "",
-        dateStart: null,
+        dateStart: "",
         dateEnd: "",
         authorId: "",
         locationId: ""
     })
+
+    const debouncedSearch = useDebounce(query, 500)
 
     const toggleTheme = () => {
         setTheme((curr) => curr === "light" ? "dark" : "light")
@@ -35,7 +39,7 @@ function App() {
     useEffect(() => {
         axios.get(BASE_URL, {
             params: {
-                q: filter.query,
+                q: debouncedSearch,
                 _page: page,
                 _limit: filter.limit,
                 authorId: filter.authorId === "" ? null : filter.authorId,
@@ -47,22 +51,21 @@ function App() {
             ({data, headers}) => {
                 setPaintings(data)
                 setPageQty(Math.ceil(headers['x-total-count']/filter.limit))
-                console.log(pageQty)
                 if (Math.ceil(headers['x-total-count']/filter.limit) < page) {
                     setPage(1)
                 }
             }
         )
-    }, [filter, page])
+    }, [filter, page, debouncedSearch])
 
-    return (<div className="App" id={theme}>
+    return (<div className="App">
         <div className={cx("wrapper", {"wrapper__dark": theme === "dark"})}>
             <div className={cx("wrapper__container")}>
                 <MyHeader theme={theme} toggleTheme={toggleTheme}/>
                 <MyInput
                     theme={theme}
-                    value={filter.query}
-                    onChange={e => setFilter({...filter, query: e.target.value})}
+                    value={query}
+                    onChange={e => setQuery(e.target.value)}
                     placeholder="Name"
                 />
                 <MyPaintings
