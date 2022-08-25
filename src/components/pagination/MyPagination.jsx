@@ -2,10 +2,10 @@ import React from 'react';
 import {Pagination, PaginationItem} from "@mui/material";
 import cn from 'classnames/bind';
 import styles from '../../style/index.scss'
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
+import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
+import KeyboardDoubleArrowRightRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowRightRounded';
+import KeyboardDoubleArrowLeftRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowLeftRounded';
 
 const cx = cn.bind(styles);
 
@@ -23,9 +23,10 @@ const MyPagination = ({pageQty, page, setPage, theme}) => {
                     onChange={(_, num) => setPage(num)}
                     renderItem={(item) => (
                         <PaginationItem
+                            fontSize="large"
                             components={{
-                                previous: KeyboardArrowLeftIcon, next: KeyboardArrowRightIcon,
-                                last: KeyboardDoubleArrowRightIcon, first: KeyboardDoubleArrowLeftIcon
+                                previous: KeyboardArrowLeftRoundedIcon, next: KeyboardArrowRightRoundedIcon,
+                                last: KeyboardDoubleArrowRightRoundedIcon, first: KeyboardDoubleArrowLeftRoundedIcon
                             }}
                             {...item}
                         />
