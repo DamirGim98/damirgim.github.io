@@ -1,11 +1,10 @@
 .dropdown {
   overflow: hidden;
   position: relative;
-  width: 270px;
-  height: 45px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   transition: 0.5s all;
+  background-color: #FFFFFF;
   &_down {
     height: 350px;
   }
@@ -46,7 +45,6 @@
     padding-top: 5px;
     overflow-y:scroll ;
     &::-webkit-scrollbar {
-      z-index: 2;
       width: 7px;
       &-thumb {
         background: #7B7B7B;
@@ -57,8 +55,9 @@
   }
   &_item {
     padding-left: 30px;
+    padding-right: 10px;
     display: flex;
-    width: 100%;
+    width: auto;
     height: 40px;
     font-size: 14px;
     align-items: center;
@@ -67,6 +66,11 @@
     &:hover {
       background-color: black;
       color: white;
+    }
+    div {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space:nowrap;
     }
   }
   &_dark {
@@ -83,16 +87,13 @@
         color: black;
       }
     }
-    hr {
-      background-color: rgba(255, 255, 255, 0.3);;
-    }
   }
   hr {
     margin-top: 9px;
     width: 100%;
     border: none;
     height: 1px;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: #7B7B7B;
   }
 }
 

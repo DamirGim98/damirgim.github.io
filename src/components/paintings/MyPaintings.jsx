@@ -24,6 +24,7 @@ const MyPaintings = ({ paintings, authors, locations }) => {
           imgUrl={item.imageUrl}
         />
       ))}
+      {paintings.length === 0 && <h1>No such paintings</h1>}
     </div>
   );
 };

@@ -9,6 +9,7 @@ const MyPainting = ({ imgUrl, name, authorName, created, location }) => {
   return (
     <div className={cx("painting")}>
       <img
+        loading="lazy"
         onLoad={() => setImgLoaded(true)}
         className={cx("painting__image", { painting__image_loaded: imgLoaded })}
         src={`https://test-front.framework.team${imgUrl}`}

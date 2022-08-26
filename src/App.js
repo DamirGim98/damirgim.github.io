@@ -3,14 +3,13 @@ import axios from "axios";
 import "./style/resetStyle.css";
 import "./style/App.module.scss";
 import MyHeader from "./components/header/MyHeader";
-import MyInput from "./components/UI/input/MyInput";
 import MyPaintings from "./components/paintings/MyPaintings";
 import useDebounce from "./hooks/use-debounce";
 import MyWrapper from "./components/wrapper/MyWrapper";
 import MyPagination from "./components/pagination/MyPagination";
-import MyDropDown from "./components/UI/dropdown/MyDropDown";
 import DataService from "./API/DataService";
 import NormalizeField from "./helpers/NormalizeField";
+import MyFilters from "./components/filters/MyFilters";
 
 const BASE_URL = "https://test-front.framework.team/paintings?";
 
@@ -75,32 +74,28 @@ function App() {
     <div className="App">
       <MyWrapper theme={theme}>
         <MyHeader theme={theme} toggleTheme={toggleTheme} />
-        <div style={{ display: "flex" }}>
-          <MyInput
-            theme={theme}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Name"
-          />
-          <MyDropDown
-            theme={theme}
-            items={authors}
-            filter={filter}
-            setFilter={setFilter}
-            searchName={"Author"}
-          />
-        </div>
+        <MyFilters
+          theme={theme}
+          authors={authors}
+          locations={locations}
+          filter={filter}
+          setFilter={setFilter}
+          query={query}
+          setQuery={setQuery}
+        />
         <MyPaintings
           paintings={paintings}
           authors={authors}
           locations={locations}
         />
-        <MyPagination
-          theme={theme}
-          page={page}
-          setPage={setPage}
-          pageQty={pageQty}
-        />
+        {pageQty > 1 && (
+          <MyPagination
+            theme={theme}
+            page={page}
+            setPage={setPage}
+            pageQty={pageQty}
+          />
+        )}
       </MyWrapper>
     </div>
   );

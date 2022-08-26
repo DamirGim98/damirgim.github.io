@@ -58,7 +58,7 @@ const MyDropDown = ({ theme, filter, setFilter, items, searchName }) => {
             }}
             className={cx("dropdown_item")}
           >
-            {item.name}
+            <div>{item.name}</div>
           </div>
         ))}
       </div>
