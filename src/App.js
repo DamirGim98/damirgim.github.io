@@ -22,9 +22,8 @@ function App() {
 
   const [page, setPage] = useState(1);
 
-  const [query, setQuery] = useState("");
-
   const [filter, setFilter] = useState({
+    query: "",
     limit: 12,
     dateStart: "",
     dateEnd: "",
@@ -32,7 +31,8 @@ function App() {
     locationId: "",
   });
 
-  const debouncedSearch = useDebounce(query, 500);
+  const [network, setNetwork] = useState(true);
+  const debouncedFilter = useDebounce(filter, 500);
 
   const toggleTheme = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
@@ -42,53 +42,70 @@ function App() {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    DataService.getAll("authors").then((data) => setAuthors(data));
-    DataService.getAll("locations").then((data) =>
-      setLocations(NormalizeField(data))
-    );
+    DataService.getAll("authors")
+      .then((data) => setAuthors(data))
+      .catch((_) => setNetwork(false));
+    DataService.getAll("locations")
+      .then((data) => setLocations(NormalizeField(data)))
+      .catch((_) => setNetwork(false));
   }, []);
 
   useEffect(() => {
     axios
       .get(BASE_URL, {
         params: {
-          q: debouncedSearch,
+          q: debouncedFilter.query,
           _page: page,
-          _limit: filter.limit,
-          authorId: filter.authorId === "" ? null : filter.authorId,
-          created_gte: filter.dateStart === "" ? null : filter.dateStart,
-          created_lte: filter.dateEnd === "" ? null : filter.dateEnd,
-          locationId: filter.locationId === "" ? null : filter.locationId,
+          _limit: debouncedFilter.limit,
+          authorId:
+            debouncedFilter.authorId === "" ? null : debouncedFilter.authorId,
+          created_gte:
+            debouncedFilter.dateStart === "" ? null : debouncedFilter.dateStart,
+          created_lte:
+            debouncedFilter.dateEnd === "" ? null : debouncedFilter.dateEnd,
+          locationId:
+            debouncedFilter.locationId === ""
+              ? null
+              : debouncedFilter.locationId,
         },
       })
       .then(({ data, headers }) => {
         setPaintings(data);
-        setPageQty(Math.ceil(headers["x-total-count"] / filter.limit));
-        if (Math.ceil(headers["x-total-count"] / filter.limit) < page) {
+        setPageQty(Math.ceil(headers["x-total-count"] / debouncedFilter.limit));
+        if (
+          Math.ceil(headers["x-total-count"] / debouncedFilter.limit) < page
+        ) {
           setPage(1);
         }
-      });
-  }, [filter, page, debouncedSearch]);
+      })
+      .catch((_) => setNetwork(false));
+  }, [page, debouncedFilter]);
 
   return (
     <div className="App">
       <MyWrapper theme={theme}>
         <MyHeader theme={theme} toggleTheme={toggleTheme} />
-        <MyFilters
-          theme={theme}
-          authors={authors}
-          locations={locations}
-          filter={filter}
-          setFilter={setFilter}
-          query={query}
-          setQuery={setQuery}
-        />
-        <MyPaintings
-          paintings={paintings}
-          authors={authors}
-          locations={locations}
-        />
-        {pageQty > 1 && (
+        {!network && (
+          <h1 style={{ color: "grey" }}>Network error, try later</h1>
+        )}
+        {network && (
+          <MyFilters
+            theme={theme}
+            authors={authors}
+            locations={locations}
+            filter={filter}
+            setFilter={setFilter}
+          />
+        )}
+        {network && (
+          <MyPaintings
+            paintings={paintings}
+            authors={authors}
+            locations={locations}
+            theme={theme}
+          />
+        )}
+        {pageQty > 1 && network && (
           <MyPagination
             theme={theme}
             page={page}

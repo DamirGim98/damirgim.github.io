@@ -6,21 +6,13 @@ import MyDropDown from "../UI/dropdown/MyDropDown";
 import MyRange from "../UI/range/MyRange";
 const cx = cn.bind(styles);
 
-const MyFilters = ({
-  theme,
-  query,
-  authors,
-  locations,
-  filter,
-  setFilter,
-  setQuery,
-}) => {
+const MyFilters = ({ theme, authors, locations, filter, setFilter }) => {
   return (
     <div className={cx("filter_wrapper")}>
       <MyInput
         theme={theme}
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        value={filter.query}
+        onChange={(e) => setFilter({ ...filter, query: e.target.value })}
         placeholder="Name"
       />
       <MyDropDown

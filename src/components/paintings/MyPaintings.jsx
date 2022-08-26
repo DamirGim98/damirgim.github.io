@@ -5,7 +5,7 @@ import MyPainting from "../painting/MyPainting";
 
 const cx = cn.bind(styles);
 
-const MyPaintings = ({ paintings, authors, locations }) => {
+const MyPaintings = ({ paintings, authors, locations, theme }) => {
   return (
     <div className={cx("paintings")}>
       {paintings.map((item) => (
@@ -24,7 +24,9 @@ const MyPaintings = ({ paintings, authors, locations }) => {
           imgUrl={item.imageUrl}
         />
       ))}
-      {paintings.length === 0 && <h1>No such paintings</h1>}
+      {paintings.length === 0 && (
+        <h1 className={cx(`title_${theme}`)}>No such paintings</h1>
+      )}
     </div>
   );
 };
