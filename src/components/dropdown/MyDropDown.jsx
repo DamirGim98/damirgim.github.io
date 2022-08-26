@@ -19,10 +19,11 @@ const MyDropDown = ({ theme, filter, setFilter, items, searchName }) => {
       )}
     >
       <div className={cx("dropdown_btn")}>
-        {selected}
-        <div>
+        <div className={cx("dropdown_text")}>{selected}</div>
+        <div className={cx("dropdown_buttons")}>
           {selected !== searchName ? (
             <CloseIcon
+              className={cx("dropdown_buttons_close")}
               onClick={(event) => {
                 setSelected(searchName);
                 if (searchName === "Author") {

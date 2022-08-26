@@ -9,14 +9,33 @@
   &_down {
     height: 300px;
   }
+  &_text {
+    max-width: 200px;
+    height: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space:nowrap;
+  }
+  &_buttons {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    svg{
+      color: grey;
+    }
+    &_close {
+      font-size: 18px;
+    }
+  }
   &_btn {
+    margin-top: 10px;
     font-size: 14px;
     font-weight: 400;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 10px;
     padding-left: 15px;
+    padding-right: 5px;
   }
   &_content {
     width: 100%;
