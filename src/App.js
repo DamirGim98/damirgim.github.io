@@ -8,7 +8,7 @@ import MyPaintings from "./components/paintings/MyPaintings";
 import useDebounce from "./hooks/use-debounce";
 import MyWrapper from "./components/wrapper/MyWrapper";
 import MyPagination from "./components/pagination/MyPagination";
-import MyDropDown from "./components/dropdown/MyDropDown";
+import MyDropDown from "./components/UI/dropdown/MyDropDown";
 import DataService from "./API/DataService";
 import NormalizeField from "./helpers/NormalizeField";
 
