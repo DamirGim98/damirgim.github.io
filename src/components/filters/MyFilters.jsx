@@ -3,6 +3,7 @@ import cn from "classnames/bind";
 import styles from "./MyFilters.module.scss";
 import MyInput from "../UI/input/MyInput";
 import MyDropDown from "../UI/dropdown/MyDropDown";
+import MyRange from "../UI/range/MyRange";
 const cx = cn.bind(styles);
 
 const MyFilters = ({
@@ -36,6 +37,7 @@ const MyFilters = ({
         setFilter={setFilter}
         searchName={"Locations"}
       />
+      <MyRange theme={theme} filter={filter} setFilter={setFilter} />
     </div>
   );
 };

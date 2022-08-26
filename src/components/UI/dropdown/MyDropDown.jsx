@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
+import ArrowDropUpRoundedIcon from "@mui/icons-material/ArrowDropUpRounded";
 import CloseIcon from "@mui/icons-material/Close";
 import cn from "classnames/bind";
 import styles from "./MyDropDown.module.scss";
@@ -36,9 +36,9 @@ const MyDropDown = ({ theme, filter, setFilter, items, searchName }) => {
             />
           ) : null}
           {isActive ? (
-            <ArrowDropDownIcon onClick={() => setIsActive(!isActive)} />
+            <ArrowDropDownRoundedIcon onClick={() => setIsActive(!isActive)} />
           ) : (
-            <ArrowDropUpIcon onClick={() => setIsActive(!isActive)} />
+            <ArrowDropUpRoundedIcon onClick={() => setIsActive(!isActive)} />
           )}
         </div>
       </div>
