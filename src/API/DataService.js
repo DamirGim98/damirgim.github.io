@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export default class LocationService {
-  static async getAll() {
+export default class DataService {
+  static async getAll(params) {
     try {
       const response = await axios.get(
-        "https://test-front.framework.team/locations"
+        `https://test-front.framework.team/${params}`
       );
       return response.data;
     } catch (e) {

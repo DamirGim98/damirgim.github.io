@@ -18,7 +18,7 @@ const MyPaintings = ({ paintings, authors, locations }) => {
           }
           location={
             locations.find((location) => location.id === item.locationId)
-              ?.location || "No location"
+              ?.name || "No location"
           }
           created={item.created}
           imgUrl={item.imageUrl}
