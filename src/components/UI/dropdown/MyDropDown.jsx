@@ -7,7 +7,7 @@ import styles from "./MyDropDown.module.scss";
 
 const cx = cn.bind(styles);
 
-const MyDropDown = ({ theme, filter, setFilter, items, searchName }) => {
+export const MyDropDown = ({ theme, filter, setFilter, items, searchName }) => {
   const [isActive, setIsActive] = useState(false);
   const [selected, setSelected] = useState(searchName);
   return (
@@ -65,4 +65,3 @@ const MyDropDown = ({ theme, filter, setFilter, items, searchName }) => {
     </div>
   );
 };
-export default MyDropDown;

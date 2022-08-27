@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "./style/resetStyle.css";
 import "./style/App.module.scss";
-import MyHeader from "./components/header/MyHeader";
-import MyPaintings from "./components/paintings/MyPaintings";
-import useDebounce from "./hooks/use-debounce";
-import MyWrapper from "./components/wrapper/MyWrapper";
-import MyPagination from "./components/pagination/MyPagination";
-import DataService from "./API/DataService";
-import NormalizeField from "./helpers/NormalizeField";
-import MyFilters from "./components/filters/MyFilters";
-
-const BASE_URL = "https://test-front.framework.team/paintings?";
+import { MyHeader } from "./components/header/MyHeader";
+import { MyPaintings } from "./components/paintings/MyPaintings";
+import { useDebounce } from "./hooks/use-debounce";
+import { MyWrapper } from "./components/wrapper/MyWrapper";
+import { MyPagination } from "./components/pagination/MyPagination";
+import { NormalizeField } from "./helpers/NormalizeField";
+import { MyFilters } from "./components/filters/MyFilters";
+import { fetchAllData } from "./helpers/fetchAllData";
+import { fetchAllPaintings } from "./API/fetchAllPaintings";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -31,7 +29,7 @@ function App() {
     locationId: "",
   });
 
-  const [network, setNetwork] = useState(true);
+  const [error, setError] = useState(false);
   const debouncedFilter = useDebounce(filter, 500);
 
   const toggleTheme = () => {
@@ -42,53 +40,36 @@ function App() {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    DataService.getAll("authors")
-      .then((data) => setAuthors(data))
-      .catch((_) => setNetwork(false));
-    DataService.getAll("locations")
-      .then((data) => setLocations(NormalizeField(data)))
-      .catch((_) => setNetwork(false));
+    fetchAllData()
+      .then((data) => {
+        setAuthors(data.authors);
+        setLocations(NormalizeField(data.locations));
+      })
+      .catch(() => setError(true));
   }, []);
 
   useEffect(() => {
-    axios
-      .get(BASE_URL, {
-        params: {
-          q: debouncedFilter.query,
-          _page: page,
-          _limit: debouncedFilter.limit,
-          authorId:
-            debouncedFilter.authorId === "" ? null : debouncedFilter.authorId,
-          created_gte:
-            debouncedFilter.dateStart === "" ? null : debouncedFilter.dateStart,
-          created_lte:
-            debouncedFilter.dateEnd === "" ? null : debouncedFilter.dateEnd,
-          locationId:
-            debouncedFilter.locationId === ""
-              ? null
-              : debouncedFilter.locationId,
-        },
-      })
+    fetchAllPaintings(debouncedFilter, page)
       .then(({ data, headers }) => {
+        const amountOfPages = Math.ceil(
+          headers["x-total-count"] / debouncedFilter.limit
+        );
         setPaintings(data);
-        setPageQty(Math.ceil(headers["x-total-count"] / debouncedFilter.limit));
-        if (
-          Math.ceil(headers["x-total-count"] / debouncedFilter.limit) < page
-        ) {
+        setPageQty(amountOfPages);
+        if (amountOfPages < page) {
           setPage(1);
         }
       })
-      .catch((_) => setNetwork(false));
+      .catch(() => setError(true));
   }, [page, debouncedFilter]);
 
   return (
     <div className="App">
       <MyWrapper theme={theme}>
         <MyHeader theme={theme} toggleTheme={toggleTheme} />
-        {!network && (
-          <h1 style={{ color: "grey" }}>Network error, try later</h1>
-        )}
-        {network && (
+        {error ? (
+          <h1>Network error, try later</h1>
+        ) : (
           <>
             <MyFilters
               theme={theme}
@@ -105,7 +86,7 @@ function App() {
             />
           </>
         )}
-        {pageQty > 1 && network && (
+        {pageQty > 1 && !error && (
           <MyPagination
             theme={theme}
             page={page}

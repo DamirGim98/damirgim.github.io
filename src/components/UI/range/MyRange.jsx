@@ -4,7 +4,7 @@ import ArrowDropUpRoundedIcon from "@mui/icons-material/ArrowDropUpRounded";
 import cn from "classnames/bind";
 import styles from "./MyRange.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
-import MyInput from "../input/MyInput";
+import { MyInput } from "../input/MyInput";
 
 const cx = cn.bind(styles);
 

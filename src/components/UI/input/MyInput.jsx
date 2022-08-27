@@ -5,7 +5,7 @@ import styles from "./MyInput.module.scss";
 
 const cx = cn.bind(styles);
 
-const MyInput = (props) => {
+export const MyInput = (props) => {
   return (
     <input
       className={cx("input", { input__dark: props.theme === "dark" })}
@@ -13,5 +13,3 @@ const MyInput = (props) => {
     />
   );
 };
-
-export default MyInput;

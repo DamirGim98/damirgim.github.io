@@ -9,12 +9,9 @@ import KeyboardDoubleArrowLeftRoundedIcon from "@mui/icons-material/KeyboardDoub
 
 const cx = cn.bind(styles);
 
-const MyPagination = ({ pageQty, page, setPage, theme }) => {
+export const MyPagination = ({ pageQty, page, setPage, theme }) => {
   return (
-    <div
-      className={cx("pagination", { pagination_dark: theme === "dark" })}
-      style={{ marginTop: "44px", marginBottom: "93px" }}
-    >
+    <div className={cx("pagination", { pagination_dark: theme === "dark" })}>
       {!!pageQty && (
         <Pagination
           count={pageQty}
@@ -39,4 +36,3 @@ const MyPagination = ({ pageQty, page, setPage, theme }) => {
     </div>
   );
 };
-export default MyPagination;

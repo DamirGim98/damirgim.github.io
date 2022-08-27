@@ -1,11 +1,11 @@
 import React from "react";
 import cn from "classnames/bind";
 import styles from "./MyPaintings.module.scss";
-import MyPainting from "../painting/MyPainting";
+import { MyPainting } from "../painting/MyPainting";
 
 const cx = cn.bind(styles);
 
-const MyPaintings = ({ paintings, authors, locations, theme }) => {
+export const MyPaintings = ({ paintings, authors, locations, theme }) => {
   return (
     <div className={cx("paintings")}>
       {paintings.map((item) => (
@@ -30,5 +30,3 @@ const MyPaintings = ({ paintings, authors, locations, theme }) => {
     </div>
   );
 };
-
-export default MyPaintings;

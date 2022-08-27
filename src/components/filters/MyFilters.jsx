@@ -1,12 +1,12 @@
 import React from "react";
 import cn from "classnames/bind";
 import styles from "./MyFilters.module.scss";
-import MyInput from "../UI/input/MyInput";
-import MyDropDown from "../UI/dropdown/MyDropDown";
+import { MyInput } from "../UI/input/MyInput";
+import { MyDropDown } from "../UI/dropdown/MyDropDown";
 import MyRange from "../UI/range/MyRange";
 const cx = cn.bind(styles);
 
-const MyFilters = ({ theme, authors, locations, filter, setFilter }) => {
+export const MyFilters = ({ theme, authors, locations, filter, setFilter }) => {
   return (
     <div className={cx("filter_wrapper")}>
       <MyInput
@@ -33,5 +33,3 @@ const MyFilters = ({ theme, authors, locations, filter, setFilter }) => {
     </div>
   );
 };
-
-export default MyFilters;

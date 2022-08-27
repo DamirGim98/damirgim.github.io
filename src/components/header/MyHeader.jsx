@@ -3,7 +3,7 @@ import { ReactComponent as Logo } from "./images/logo.svg";
 import { ReactComponent as BulbSwitchLight } from "./images/bulb_light.svg";
 import { ReactComponent as BulbSwitchDark } from "./images/bulb_dark.svg";
 import classes from "./MyHeader.module.scss";
-const MyHeader = ({ theme, toggleTheme }) => {
+export const MyHeader = ({ theme, toggleTheme }) => {
   return (
     <div className={classes.header}>
       <Logo className={classes.header__logo} />
@@ -17,4 +17,3 @@ const MyHeader = ({ theme, toggleTheme }) => {
     </div>
   );
 };
-export default MyHeader;

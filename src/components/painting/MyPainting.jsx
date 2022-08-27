@@ -4,7 +4,7 @@ import styles from "./MyPainting.module.scss";
 
 const cx = cn.bind(styles);
 
-const MyPainting = ({ imgUrl, name, authorName, created, location }) => {
+export const MyPainting = ({ imgUrl, name, authorName, created, location }) => {
   const [imgLoaded, setImgLoaded] = useState(false);
   return (
     <div className={cx("painting")}>
@@ -36,5 +36,3 @@ const MyPainting = ({ imgUrl, name, authorName, created, location }) => {
     </div>
   );
 };
-
-export default MyPainting;
