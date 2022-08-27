@@ -89,21 +89,21 @@ function App() {
           <h1 style={{ color: "grey" }}>Network error, try later</h1>
         )}
         {network && (
-          <MyFilters
-            theme={theme}
-            authors={authors}
-            locations={locations}
-            filter={filter}
-            setFilter={setFilter}
-          />
-        )}
-        {network && (
-          <MyPaintings
-            paintings={paintings}
-            authors={authors}
-            locations={locations}
-            theme={theme}
-          />
+          <>
+            <MyFilters
+              theme={theme}
+              authors={authors}
+              locations={locations}
+              filter={filter}
+              setFilter={setFilter}
+            />
+            <MyPaintings
+              paintings={paintings}
+              authors={authors}
+              locations={locations}
+              theme={theme}
+            />
+          </>
         )}
         {pageQty > 1 && network && (
           <MyPagination

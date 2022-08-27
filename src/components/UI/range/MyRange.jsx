@@ -26,7 +26,6 @@ const MyRange = ({ filter, setFilter, theme }) => {
               className={cx("range_close")}
               onClick={(event) => {
                 setFilter({ ...filter, dateStart: "", dateEnd: "" });
-                setIsActive(!isActive);
                 event.stopPropagation();
               }}
             />
