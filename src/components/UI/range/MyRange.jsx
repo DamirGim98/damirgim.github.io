@@ -5,13 +5,18 @@ import cn from "classnames/bind";
 import styles from "./MyRange.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import { MyInput } from "../input/MyInput";
+import { useClickOutside } from "../../../hooks/use-outside";
 
 const cx = cn.bind(styles);
 
 const MyRange = ({ filter, setFilter, theme }) => {
   const [isActive, setIsActive] = useState(false);
+  let range = useClickOutside(() => {
+    setIsActive(false);
+  });
   return (
     <div
+      ref={range}
       className={cx(
         "range",
         { range_dark: theme === "dark" },
