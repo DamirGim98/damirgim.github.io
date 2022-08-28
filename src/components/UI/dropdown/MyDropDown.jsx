@@ -23,7 +23,10 @@ export const MyDropDown = ({ theme, filter, setFilter, items, searchName }) => {
         { dropdown_down: isActive }
       )}
     >
-      <div className={cx("dropdown_btn")}>
+      <div
+        onClick={() => setIsActive(!isActive)}
+        className={cx("dropdown_btn")}
+      >
         <div className={cx("dropdown_text")}>{selected}</div>
         <div className={cx("dropdown_buttons")}>
           {selected !== searchName ? (
@@ -40,11 +43,7 @@ export const MyDropDown = ({ theme, filter, setFilter, items, searchName }) => {
               }}
             />
           ) : null}
-          {isActive ? (
-            <ArrowDropDownRoundedIcon onClick={() => setIsActive(!isActive)} />
-          ) : (
-            <ArrowDropUpRoundedIcon onClick={() => setIsActive(!isActive)} />
-          )}
+          {isActive ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}
         </div>
       </div>
       <hr />

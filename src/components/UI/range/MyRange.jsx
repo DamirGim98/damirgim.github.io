@@ -23,7 +23,7 @@ const MyRange = ({ filter, setFilter, theme }) => {
         { range_down: isActive }
       )}
     >
-      <div className={cx("range_menu")}>
+      <div onClick={() => setIsActive(!isActive)} className={cx("range_menu")}>
         <div className={cx("range_text")}>Created</div>
         <div className={cx("range_buttons")}>
           {(filter.dateEnd || filter.dateStart) !== "" ? (
@@ -35,11 +35,7 @@ const MyRange = ({ filter, setFilter, theme }) => {
               }}
             />
           ) : null}
-          {isActive ? (
-            <ArrowDropDownRoundedIcon onClick={() => setIsActive(!isActive)} />
-          ) : (
-            <ArrowDropUpRoundedIcon onClick={() => setIsActive(!isActive)} />
-          )}
+          {isActive ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}
         </div>
       </div>
       <div className={cx("range_content")}>
