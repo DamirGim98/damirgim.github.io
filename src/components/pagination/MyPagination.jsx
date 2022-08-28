@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Pagination, PaginationItem } from "@mui/material";
 import cn from "classnames/bind";
 import styles from "../../style/index.scss";
@@ -10,6 +10,12 @@ import KeyboardDoubleArrowLeftRoundedIcon from "@mui/icons-material/KeyboardDoub
 const cx = cn.bind(styles);
 
 export const MyPagination = ({ pageQty, page, setPage, theme }) => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [page]);
   return (
     <div className={cx("pagination", { pagination_dark: theme === "dark" })}>
       {!!pageQty && (
