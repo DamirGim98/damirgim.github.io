@@ -4,14 +4,19 @@ import ArrowDropUpRoundedIcon from "@mui/icons-material/ArrowDropUpRounded";
 import CloseIcon from "@mui/icons-material/Close";
 import cn from "classnames/bind";
 import styles from "./MyDropDown.module.scss";
+import { useClickOutside } from "../../../hooks/use-outside";
 
 const cx = cn.bind(styles);
 
 export const MyDropDown = ({ theme, filter, setFilter, items, searchName }) => {
   const [isActive, setIsActive] = useState(false);
   const [selected, setSelected] = useState(searchName);
+  let dropdown = useClickOutside(() => {
+    setIsActive(false);
+  });
   return (
     <div
+      ref={dropdown}
       className={cx(
         "dropdown",
         { dropdown_dark: theme === "dark" },
