@@ -15,7 +15,14 @@ export const MyPainting = ({ imgUrl, name, authorName, created, location }) => {
         src={`https://test-front.framework.team${imgUrl}`}
         alt={name}
       />
-
+      {!imgLoaded && (
+        <div className={cx("lds-ring")}>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      )}
       <div className={cx("painting__description")}>
         <div className={cx("painting__name")}>{name}</div>
         <div className={cx("painting__info")}>
