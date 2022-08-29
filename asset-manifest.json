@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/damirgim.github.io/static/css/main.a46aeba2.css",
-    "main.js": "/damirgim.github.io/static/js/main.329e8118.js",
+    "main.css": "/damirgim.github.io/static/css/main.8e3cb873.css",
+    "main.js": "/damirgim.github.io/static/js/main.4665e0bd.js",
     "static/media/bulb_dark.svg": "/damirgim.github.io/static/media/bulb_dark.a8ac97a824cf6903506920bb92185a12.svg",
     "static/media/bulb_light.svg": "/damirgim.github.io/static/media/bulb_light.cbbced2826c8ebdb046535df46b8e1d9.svg",
     "static/media/logo.svg": "/damirgim.github.io/static/media/logo.f546b6794fb0f873fa48f33b1fabc88c.svg",
     "index.html": "/damirgim.github.io/index.html",
-    "main.a46aeba2.css.map": "/damirgim.github.io/static/css/main.a46aeba2.css.map",
-    "main.329e8118.js.map": "/damirgim.github.io/static/js/main.329e8118.js.map"
+    "main.8e3cb873.css.map": "/damirgim.github.io/static/css/main.8e3cb873.css.map",
+    "main.4665e0bd.js.map": "/damirgim.github.io/static/js/main.4665e0bd.js.map"
   },
   "entrypoints": [
-    "static/css/main.a46aeba2.css",
-    "static/js/main.329e8118.js"
+    "static/css/main.8e3cb873.css",
+    "static/js/main.4665e0bd.js"
   ]
 }
