@@ -22,6 +22,9 @@
     svg {
       color: grey;
     }
+    .range_close {
+      font-size: 18px;
+    }
   }
 
   &_down {
@@ -32,11 +35,7 @@
     display: flex;
     align-items: center;
   }
-
-  &_close {
-    font-size: 18px;
-  }
-
+  
   &_content {
     height: auto;
     display: flex;
