@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/damirgim.github.io/static/css/main.ad257647.css",
+    "main.css": "/damirgim.github.io/static/css/main.a46aeba2.css",
     "main.js": "/damirgim.github.io/static/js/main.329e8118.js",
     "static/media/bulb_dark.svg": "/damirgim.github.io/static/media/bulb_dark.a8ac97a824cf6903506920bb92185a12.svg",
     "static/media/bulb_light.svg": "/damirgim.github.io/static/media/bulb_light.cbbced2826c8ebdb046535df46b8e1d9.svg",
     "static/media/logo.svg": "/damirgim.github.io/static/media/logo.f546b6794fb0f873fa48f33b1fabc88c.svg",
     "index.html": "/damirgim.github.io/index.html",
-    "main.ad257647.css.map": "/damirgim.github.io/static/css/main.ad257647.css.map",
+    "main.a46aeba2.css.map": "/damirgim.github.io/static/css/main.a46aeba2.css.map",
     "main.329e8118.js.map": "/damirgim.github.io/static/js/main.329e8118.js.map"
   },
   "entrypoints": [
-    "static/css/main.ad257647.css",
+    "static/css/main.a46aeba2.css",
     "static/js/main.329e8118.js"
   ]
 }
